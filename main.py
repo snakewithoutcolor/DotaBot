@@ -2,6 +2,7 @@ import win32api, win32con, win32gui
 import time
 import gc
 import pywintypes
+import ctypes
 
 # format: (x, y, (r, g, b), "text")
 
@@ -45,10 +46,10 @@ class Bot():
             (i_colour >> 16) & 0xff)
 
     def click(self, coords):
-        win32api.SetCursorPos((coords[0], coords[1]))
+        ctypes.windll.user32.SetCursorPos(coords[0], coords[1])
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,coords[0],coords[1],0,0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,coords[0],coords[1],0,0)
-        time.sleep(1)
+        time.sleep(2)
 
     def find_window(self, WINDOW_NAME):
         try:
